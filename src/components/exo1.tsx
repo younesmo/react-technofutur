@@ -17,13 +17,12 @@ const Exo1= ({name, age} : Props) => {
 }
 
 Exo1.defaultProps= {
-    name: "Younes",
-    age: 26
+    age: 18
 }
 
 Exo1.propTypes= {
     name: PropTypes.string.isRequired,
-    age: PropTypes.number.isRequired
+    age: PropTypes.number
 }
 
 export default Exo1;
