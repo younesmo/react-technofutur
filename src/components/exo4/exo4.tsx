@@ -15,11 +15,7 @@ const Exo4 = ()=> {
 
     const handleSubmit= (e: FormEvent<HTMLFormElement>)=> {
         e.preventDefault();
-        setVal(prev => {
-            const maxId= Math.max(...todos.map(todo=> todo.id));
-            return {...prev, id: maxId+1};
-        })
-        setTodos(prev => [...prev, val]);
+        setTodos(prev => [...prev, {...val, id: Date.now()}]);
         setVal({id:0, name: "", description: "", priority: "normal", isCompleted: false})
     }
 
@@ -38,13 +34,14 @@ const Exo4 = ()=> {
     }
 
 
-    const todosElem= todos.map(task=> <Todo task={task} handleComplete={handleComplete} handleDelete={handleDelete}/>)
+    const todosElem= todos.map(task=> <Todo key={task.id} task={task} handleComplete={handleComplete} handleDelete={handleDelete}/>)
 
     return (
-        <div>
+        <div className="row">
             <h1>Ajouter une nouvelle tâche</h1>
             <AddTodo val={val} setVal={setVal} handleSubmit={handleSubmit}/>
-            <h1>Ajouter une nouvelle tâche</h1>
+            <hr/>
+            <h1>Liste des tâches</h1>
             {todosElem}
         </div>
     )
