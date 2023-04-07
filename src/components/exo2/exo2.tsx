@@ -1,4 +1,5 @@
 import { useState } from "react"
+import PropTypes from 'prop-types'
 
 interface Props {
     incrementVal: number
@@ -23,6 +24,10 @@ const Exo2 = ({incrementVal}: Props) => {
 
 Exo2.defaultProps ={
     incrementVal: 1
+}
+
+Exo2.propTypes= {
+    incrementVal: PropTypes.number
 }
 
 export default Exo2;
