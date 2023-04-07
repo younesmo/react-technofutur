@@ -1,22 +1,26 @@
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { Task } from "./model/Task";
 
 
 interface Props {
-    val: Task;
-    setVal: React.Dispatch<React.SetStateAction<Task>>;
-    handleSubmit: (e: FormEvent<HTMLFormElement>) => void
+    handleAddTask: (task: Task) => void
 }
 
-const AddTodo= ({val, setVal, handleSubmit}: Props)=> {
+const AddTodo= ({handleAddTask}: Props)=> {
+    const [val, setVal]= useState<Task>({id:0, name: "", description: "", priority: "normal", isCompleted: false});
 
     const handleChange= (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=> {
         const {name, value} = e.target;
         setVal(prev => ({...val, [name]: value}));
     }
 
+    const handleSubmit= ()=> {
+        handleAddTask(val);
+        setVal({id:0, name: "", description: "", priority: "normal", isCompleted: false})
+    }
+
     return (
-        <form onSubmit={handleSubmit} className="mb-3">
+        <form className="mb-3">
             <div className="mb-3">
                 <label htmlFor="name" className="form-labe">Nom 
                     <input id="name" className="form-control" type="text" name="name" value={val.name} onChange={handleChange} />
@@ -38,7 +42,7 @@ const AddTodo= ({val, setVal, handleSubmit}: Props)=> {
                     </select>
                 </label>
             </div>
-            <button type="submit" className="btn btn-primary">Ajouter</button>
+            <button type="button" onClick={handleSubmit} className="btn btn-primary">Ajouter</button>
         </form>
     )
 }
