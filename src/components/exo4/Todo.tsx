@@ -12,8 +12,8 @@ import styles from "./exo4.module.css"
 const Todo= ({task, handleComplete, handleDelete}: Props)=> {
 
     return (
-        <div className="card">
-            <div className={`card-body ${task.isCompleted ? styles.completed : ""}`}>
+        <div className={`card ${task.isCompleted ? "bg-success p-2 text-dark bg-opacity-25" : ""}`}>
+            <div className={`card-body`}>
                 <h3 className="card-title">{task.name}</h3> <span className="priority">{task.priority}</span>
                 <p className="card-text">{task.description}</p>
                 <button className="btn btn-outline-success" disabled={task.isCompleted} type="button" onClick={()=> handleComplete(task.id)}>Terminer</button>
